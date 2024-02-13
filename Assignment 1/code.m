@@ -19,8 +19,8 @@ newM = 15;
 b = rand(newM,1);
 
 matrix1c = rand(newM, newM);
-matrix2c = rand(newM, newM+1);
-matrix3c = rand(newM, newM-1);
+matrix2c = rand(newM, newM-5);
+matrix3c = rand(newM, newM+5);
 
 matrix1soln = getSolutionMatrix(matrix1c, b);
 matrix2soln = getSolutionMatrix(matrix2c, b);
@@ -38,6 +38,32 @@ disp(matrix3soln)
 
 
 
+
+
+%% Task 2 %%
+
+w1 = [1; 2; -1; 3];
+w2 = [4; 1; 1; 8];
+w3 = [1; 0; 2; 2];
+w4 = [-1; 1; 2; -1];
+
+s1 = [w1 w2 w3 w4];
+
+rrefS1 = rref(s1);
+
+s1Rank = rank(rrefS1);
+
+a = rand(3,1);
+myVect = [a; 0];
+
+
+mySet = [w1 w2 w3 myVect];
+
+mySetrref = rref(mySet);
+disp(mySetrref)
+%%
+
+% Functions we use for Part 1
 function solution = getSolutionMatrix(A, B)
    
     
@@ -68,7 +94,4 @@ function [list, ld, li] = getCase(row,col)
     end
     list = myList;
 end
-
-
-%%
 
