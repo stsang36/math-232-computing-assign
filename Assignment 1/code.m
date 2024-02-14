@@ -1,4 +1,4 @@
-%% Task 1
+%% Part 1
 
 m = 10;
 
@@ -40,7 +40,8 @@ disp(matrix3soln)
 
 
 
-%% Task 2 %%
+%% Part 2 %%
+%q1
 
 w1 = [1; 2; -1; 3];
 w2 = [4; 1; 1; 8];
@@ -61,6 +62,46 @@ mySet = [w1 w2 w3 myVect];
 
 mySetrref = rref(mySet);
 disp(mySetrref)
+
+%q2
+z2 = [1; 0; 2; 2];
+z3 = [3; 4; 0; 8];
+
+s1z2 = [s1 z2];
+s1z2rref = rref(s1z2);
+disp(s1z2rref);
+
+s1z3 = [s1 z3];
+s1z3rref = rref(s1z3);
+disp(s1z3rref);
+
+%q3
+z1q3 = [2; 4; -2; 6];
+s2q3 = [z1q3 z2 z3]; 
+
+s2q3rref= rref(s2q3);
+disp(s2q3rref)
+rank(s2q3)
+
+%q4
+z1q4 = [2; 4; -2; 5];
+s2q4 = [z1q4 z2 z3];
+
+s1Basis =  [w1 w2 w3];
+
+augMatrix = [s1Basis, -s2q4]; 
+
+nullspaceMat = null(augMatrix);
+
+disp(nullspaceMat);
+
+nullspacerref = rref(nullspaceMat);
+disp(nullspacerref);
+disp(rank(nullspacerref))
+
+
+
+
 %%
 
 % Functions we use for Part 1
