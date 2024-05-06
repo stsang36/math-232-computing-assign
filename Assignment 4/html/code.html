@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>code</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-04-07">
+<meta name="DC.source" content="code.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<pre class="codeinput">m=15; <span class="comment">%Choose number of pairs</span>
+<span class="comment">%Generating data in [a1,b1]</span>
+a1=-5;
+b1=5;
+d= a1*ones(m,2)+ (b1-a1).*rand(m,2);
+
+degrees = [1,5,10];  <span class="comment">%Choose degree of polynomial</span>
+
+
+figure(1);
+hold <span class="string">on</span>;
+
+
+
+[P1, least1] = generatePoly(m, d, degrees(1));
+
+fplot(P1,[a1-.5,b1+.5])
+x1=d(:,1);
+y1=d(:,2);
+scatter(x1,y1,<span class="string">"filled"</span>,<span class="string">"o"</span>)
+xlim([-5 5])
+ylim([-5 5])
+title(<span class="string">'Polynomial with a degree of 1'</span>)
+
+[P2, least2] = generatePoly(m, d, degrees(2));
+figure(2);
+hold <span class="string">on</span>;
+fplot(P2,[a1-.5,b1+.5])
+scatter(x1,y1,<span class="string">"filled"</span>,<span class="string">"o"</span>)
+xlim([-5 5])
+ylim([-5 5])
+title(<span class="string">'Polynomial with a degree of 5'</span>)
+
+[P3, least3] = generatePoly(m, d, degrees(3));
+figure(3);
+hold <span class="string">on</span>;
+fplot(P3,[a1-.5,b1+.5])
+scatter(x1,y1,<span class="string">"filled"</span>,<span class="string">"o"</span>)
+xlim([-5 5])
+ylim([-5 5])
+title(<span class="string">'Polynomial with a degree of 10'</span>)
+
+
+disp(<span class="string">'Least squares error for degree 1:'</span>)
+disp(least1)
+disp(<span class="string">'Least squares error for degree 5:'</span>)
+disp(least2)
+disp(<span class="string">'Least squares error for degree 10:'</span>)
+disp(least3)
+
+
+
+
+
+
+
+
+<span class="comment">%Creating a zero matrix to save the coefficient matrix</span>
+
+<span class="keyword">function</span> [P, least] = generatePoly(m, d, n)
+    A=zeros(m,n+1);
+
+
+    <span class="comment">%The following loop produces the coefficient matrix A</span>
+    <span class="keyword">for</span> i=1:m
+        <span class="keyword">for</span> j=1:(n+1)
+    A(i,j)=d(i,1)^(j-1);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    <span class="comment">%Constructing the right-hand side vector b in Ax=b</span>
+    b=zeros(m,1);
+    <span class="keyword">for</span> i=1:m
+        b(i)=d(i,2);
+    <span class="keyword">end</span>
+
+    <span class="comment">%Constructing the coefficient matrix of normal equation</span>
+    B=A'*A;
+
+
+    <span class="comment">%Finding the coefficient of polynomial y_1=a_0; y_2=a_1,....</span>
+    <span class="comment">%Instead of the following line, use R=rref([A'*A,A'*b]) to find the solution of</span>
+    <span class="comment">%linear system A'*Ay=A'*b and extract y from the last column R</span>
+    R=rref([A'*A,A'*b]);
+    y=R(:, end);
+
+
+
+    syms <span class="string">x</span>   <span class="comment">%This command defines x as variable</span>
+    P = 0;
+
+    <span class="keyword">for</span> i =1:n+1
+        P = P + y(i) * x^(i-1);
+    <span class="keyword">end</span>
+
+    er=zeros(m,1);
+    <span class="keyword">for</span> i=1:m
+
+        P_D = 0;
+        pointX = d(i,1);
+        <span class="keyword">for</span> j=1:n+1
+            P_D = P_D + y(j) * pointX^(j-1);
+        <span class="keyword">end</span>
+        er(i)=abs(d(i,2)- P_D);
+    <span class="keyword">end</span>
+
+    least = norm(er);
+
+<span class="keyword">end</span>
+</pre>
+<pre class="codeoutput">Least squares error for degree 1:
+    8.5336
+
+Least squares error for degree 5:
+    6.8643
+
+Least squares error for degree 10:
+    5.7783
+
+</pre>
+<img vspace="5" hspace="5" src="code_01.png" alt=""> <img vspace="5" hspace="5" src="code_02.png" alt=""> <img vspace="5" hspace="5" src="code_03.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+m=15; %Choose number of pairs 
+%Generating data in [a1,b1]
+a1=-5; 
+b1=5;
+d= a1*ones(m,2)+ (b1-a1).*rand(m,2);
+
+degrees = [1,5,10];  %Choose degree of polynomial 
+
+
+figure(1);
+hold on;
+
+
+
+[P1, least1] = generatePoly(m, d, degrees(1));
+
+fplot(P1,[a1-.5,b1+.5])
+x1=d(:,1);
+y1=d(:,2);
+scatter(x1,y1,"filled","o")
+xlim([-5 5])
+ylim([-5 5])
+title('Polynomial with a degree of 1')
+
+[P2, least2] = generatePoly(m, d, degrees(2));
+figure(2);
+hold on;
+fplot(P2,[a1-.5,b1+.5])
+scatter(x1,y1,"filled","o")
+xlim([-5 5])
+ylim([-5 5])
+title('Polynomial with a degree of 5')
+
+[P3, least3] = generatePoly(m, d, degrees(3));
+figure(3);
+hold on;
+fplot(P3,[a1-.5,b1+.5])
+scatter(x1,y1,"filled","o")
+xlim([-5 5])
+ylim([-5 5])
+title('Polynomial with a degree of 10')
+
+
+disp('Least squares error for degree 1:')
+disp(least1)
+disp('Least squares error for degree 5:')
+disp(least2)
+disp('Least squares error for degree 10:')
+disp(least3)
+
+
+
+
+
+
+
+
+%Creating a zero matrix to save the coefficient matrix
+
+function [P, least] = generatePoly(m, d, n)
+    A=zeros(m,n+1); 
+
+
+    %The following loop produces the coefficient matrix A
+    for i=1:m
+        for j=1:(n+1)
+    A(i,j)=d(i,1)^(j-1);
+        end
+    end
+    %Constructing the right-hand side vector b in Ax=b
+    b=zeros(m,1);
+    for i=1:m
+        b(i)=d(i,2);
+    end
+
+    %Constructing the coefficient matrix of normal equation  
+    B=A'*A; 
+    
+    
+    %Finding the coefficient of polynomial y_1=a_0; y_2=a_1,....
+    %Instead of the following line, use R=rref([A'*A,A'*b]) to find the solution of
+    %linear system A'*Ay=A'*b and extract y from the last column R
+    R=rref([A'*A,A'*b]);
+    y=R(:, end);
+
+    
+    
+    syms x   %This command defines x as variable 
+    P = 0;
+
+    for i =1:n+1
+        P = P + y(i) * x^(i-1);
+    end
+    
+    er=zeros(m,1);
+    for i=1:m
+
+        P_D = 0;
+        pointX = d(i,1);
+        for j=1:n+1
+            P_D = P_D + y(j) * pointX^(j-1);
+        end
+        er(i)=abs(d(i,2)- P_D);
+    end
+
+    least = norm(er);
+
+end 
+
+
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>

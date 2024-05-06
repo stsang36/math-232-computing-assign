@@ -1,0 +1,390 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>code</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-03-08">
+<meta name="DC.source" content="code.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#2">Display</a>
+</li>
+<li>
+<a href="#3">task 2</a>
+</li>
+<li>
+<a href="#4">Task 3</a>
+</li>
+</ul>
+</div>
+<pre class="codeinput">
+<span class="comment">%%task 1</span>
+v = rand(2, 1);
+
+
+unitV = v / norm(v);
+
+M = zeros(2,6);
+M(:,1) = unitV;
+
+<span class="keyword">for</span> i=2:6
+    p = (i-1)*(pi/3);
+    R = [cos(p) -sin(p); sin(p) cos(p)];
+    M(:,i) = R*unitV ;
+<span class="keyword">end</span>
+</pre>
+<h2 id="2">Display</h2>
+<pre class="codeinput">figure(1)
+origin = zeros(1,size(M,2));
+plot([origin; M(1,:)],[origin; M(2,:)]);
+</pre>
+<img vspace="5" hspace="5" src="code_01.png" alt=""> <h2 id="3">task 2</h2>
+<pre class="codeinput">
+<span class="comment">%rotate by value 180</span>
+theta = deg2rad(180);
+
+R2 = [cos(theta) -sin(theta); sin(theta) cos(theta)];
+M2 = zeros(2,6);
+
+<span class="keyword">for</span> i=1:6
+    M2(:, i) = R2*M(:, i);
+<span class="keyword">end</span>
+
+figure(2)
+origin = zeros(1,size(M2,2));
+plot([origin; M2(1,:)],[origin; M2(2,:)]);
+
+<span class="comment">% reflect across y=x</span>
+
+
+R3 = [0 1; 1 0];
+M3 = zeros(2,6);
+
+<span class="keyword">for</span> i=1:6
+    M3(:, i) = R3*M(:, i);
+<span class="keyword">end</span>
+
+figure(3)
+origin = zeros(1,size(M3,2));
+plot([origin; M3(1,:)],[origin; M3(2,:)]);
+</pre>
+<img vspace="5" hspace="5" src="code_02.png" alt=""> <img vspace="5" hspace="5" src="code_03.png" alt=""> <h2 id="4">Task 3</h2>
+<pre class="codeinput">
+<span class="comment">% a</span>
+theta1a = pi/23223;
+theta2a = pi/4;
+
+
+T1a = [cos(theta1a) -sin(theta1a); sin(theta1a) cos(theta1a)];
+T2a = [cos(theta2a) -sin(theta2a); sin(theta2a) cos(theta2a)];
+
+T12a = T1a*T2a;
+T21a = T2a*T1a;
+
+resulta = zeros(2,5);
+resultaSame = zeros(2,5);
+<span class="comment">%resulta(:, 1) = unitV;</span>
+resulta(:, 2) = T12a * unitV;
+resulta(:, 3) = T21a * unitV;
+
+
+figure(4)
+
+origin = zeros(1,size(resulta,2));
+plot([origin; resulta(1,:)],[origin; resulta(2,:)]);
+title(<span class="string">'A'</span>)
+
+
+<span class="comment">% b</span>
+
+theta1b = pi/2;
+
+T1b = [cos(theta1b) -sin(theta1b); sin(theta1b) cos(theta1b)];
+T2b = [1 0; 0 -1];
+
+T12b = T1b*T2b;
+T21b = T2b*T1b;
+
+
+resultb = zeros(2,3);
+<span class="comment">%resultb(:, 1) = unitV;</span>
+resultb(:, 2) = T12b * unitV;
+resultb(:, 3) = T21b * unitV;
+
+figure(5)
+
+origin = zeros(1,size(resultb,2));
+plot([origin; resultb(1,:)],[origin; resultb(2,:)]);
+title(<span class="string">'B'</span>)
+<span class="comment">% c</span>
+
+
+T1c = [0 1; 1 0];
+T2c = [1 0; 0 -1];
+
+T12c = T1c*T2c;
+T21c = T2c*T1c;
+
+
+resultc = zeros(2,3);
+<span class="comment">%resultc(:, 1) = unitV;</span>
+resultc(:, 2) = T12c * unitV;
+resultc(:, 3) = T21c * unitV;
+
+figure(6)
+
+origin = zeros(1,size(resultc,2));
+plot([origin; resultc(1,:)],[origin; resultc(2,:)]);
+title(<span class="string">'C'</span>)
+<span class="comment">% d</span>
+
+
+T1d = [1 -2; 0 1];
+T2d = [1 0; 2 1];
+
+T12d = T1d*T2d;
+T21d = T2d*T1d;
+
+
+resultd = zeros(2,3);
+<span class="comment">%resultd(:, 1) = unitV;</span>
+resultd(:, 2) = T12d * unitV;
+resultd(:, 3) = T21d * unitV;
+
+figure(7)
+origin = zeros(1,size(resultd,2));
+plot([origin; resultd(1,:)],[origin; resultd(2,:)]);
+title(<span class="string">'D'</span>)
+</pre>
+<img vspace="5" hspace="5" src="code_04.png" alt=""> <img vspace="5" hspace="5" src="code_05.png" alt=""> <img vspace="5" hspace="5" src="code_06.png" alt=""> <img vspace="5" hspace="5" src="code_07.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%%task 1
+v = rand(2, 1);
+
+
+unitV = v / norm(v);
+
+M = zeros(2,6); 
+M(:,1) = unitV;
+
+for i=2:6
+    p = (i-1)*(pi/3);
+    R = [cos(p) -sin(p); sin(p) cos(p)];
+    M(:,i) = R*unitV ;
+end
+
+%% Display
+figure(1)
+origin = zeros(1,size(M,2)); 
+plot([origin; M(1,:)],[origin; M(2,:)]); 
+
+
+
+
+%% task 2
+
+%rotate by value 180
+theta = deg2rad(180);
+
+R2 = [cos(theta) -sin(theta); sin(theta) cos(theta)]; 
+M2 = zeros(2,6);
+
+for i=1:6
+    M2(:, i) = R2*M(:, i);
+end
+
+figure(2)
+origin = zeros(1,size(M2,2)); 
+plot([origin; M2(1,:)],[origin; M2(2,:)]); 
+
+% reflect across y=x
+
+
+R3 = [0 1; 1 0];
+M3 = zeros(2,6);
+
+for i=1:6
+    M3(:, i) = R3*M(:, i);
+end
+
+figure(3)
+origin = zeros(1,size(M3,2)); 
+plot([origin; M3(1,:)],[origin; M3(2,:)]);
+
+
+
+%% Task 3
+
+% a
+theta1a = pi/23223;
+theta2a = pi/4;
+
+
+T1a = [cos(theta1a) -sin(theta1a); sin(theta1a) cos(theta1a)];
+T2a = [cos(theta2a) -sin(theta2a); sin(theta2a) cos(theta2a)];
+
+T12a = T1a*T2a;
+T21a = T2a*T1a;
+
+resulta = zeros(2,5);
+resultaSame = zeros(2,5);
+%resulta(:, 1) = unitV;
+resulta(:, 2) = T12a * unitV;
+resulta(:, 3) = T21a * unitV;
+
+
+figure(4)
+
+origin = zeros(1,size(resulta,2)); 
+plot([origin; resulta(1,:)],[origin; resulta(2,:)]);
+title('A')
+
+
+% b
+
+theta1b = pi/2;
+
+T1b = [cos(theta1b) -sin(theta1b); sin(theta1b) cos(theta1b)];
+T2b = [1 0; 0 -1];
+
+T12b = T1b*T2b;
+T21b = T2b*T1b;
+
+
+resultb = zeros(2,3);
+%resultb(:, 1) = unitV;
+resultb(:, 2) = T12b * unitV;
+resultb(:, 3) = T21b * unitV;
+
+figure(5)
+
+origin = zeros(1,size(resultb,2)); 
+plot([origin; resultb(1,:)],[origin; resultb(2,:)]);
+title('B')
+% c 
+
+
+T1c = [0 1; 1 0];
+T2c = [1 0; 0 -1];
+
+T12c = T1c*T2c;
+T21c = T2c*T1c;
+
+
+resultc = zeros(2,3);
+%resultc(:, 1) = unitV;
+resultc(:, 2) = T12c * unitV;
+resultc(:, 3) = T21c * unitV;
+
+figure(6)
+
+origin = zeros(1,size(resultc,2)); 
+plot([origin; resultc(1,:)],[origin; resultc(2,:)]);
+title('C')
+% d
+
+
+T1d = [1 -2; 0 1];
+T2d = [1 0; 2 1];
+
+T12d = T1d*T2d;
+T21d = T2d*T1d;
+
+
+resultd = zeros(2,3);
+%resultd(:, 1) = unitV;
+resultd(:, 2) = T12d * unitV;
+resultd(:, 3) = T21d * unitV;
+
+figure(7)
+origin = zeros(1,size(resultd,2)); 
+plot([origin; resultd(1,:)],[origin; resultd(2,:)]);
+title('D')
+
+
+
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>

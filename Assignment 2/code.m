@@ -56,8 +56,8 @@ plot([origin; M3(1,:)],[origin; M3(2,:)]);
 %% Task 3
 
 % a
-theta1a = pi;
-theta2a = pi/2;
+theta1a = pi/23223;
+theta2a = pi/4;
 
 
 T1a = [cos(theta1a) -sin(theta1a); sin(theta1a) cos(theta1a)];

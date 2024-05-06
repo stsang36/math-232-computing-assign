@@ -26,11 +26,6 @@ matrix1soln = getSolutionMatrix(matrix1c, b);
 matrix2soln = getSolutionMatrix(matrix2c, b);
 matrix3soln = getSolutionMatrix(matrix3c, b);
 
-linsolve(matrix1c, b)
-linsolve(matrix2c, b)
-linsolve(matrix3c, b)
-
-
 disp(matrix1soln)
 disp(matrix2soln)
 disp(matrix3soln)
@@ -89,7 +84,7 @@ s2q4 = [z1q4 z2 z3];
 
 s1Basis =  [w1 w2 w3];
 
-augMatrix = [s1Basis, -s2q4]; 
+augMatrix = [s1Basis -s2q4]; 
 
 nullspaceMat = null(augMatrix);
 
@@ -124,10 +119,10 @@ function [list, ld, li] = getCase(row,col)
     for i=1:5
         vectors = rand(row,col);
         theRank = rank(vectors);
-        
-        if (theRank == min(row,col))
+        disp(theRank)
+        myList = [myList, vectors];
+        if (theRank == row)
             li = li + 1;
-            myList = [myList, vectors];
         else 
             ld = ld + 1;
         end

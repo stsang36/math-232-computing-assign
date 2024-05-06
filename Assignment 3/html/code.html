@@ -1,0 +1,583 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>code</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-03-25">
+<meta name="DC.source" content="code.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Q1</a>
+</li>
+<li>
+<a href="#2">Q2</a>
+</li>
+<li>
+<a href="#3">Q3</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Q1</h2>
+<pre class="codeinput">P = [ 8/10 3/10 3/10; 1/10 6/10 1/10; 1/10 1/10 6/10 ];
+
+
+[V, D] = eig(P);
+
+eigenvalues = diag(D);
+
+precision = 10^(-10);
+rounded_eigenvalues = round(eigenvalues / precision) * precision;
+
+unique_eig = unique(rounded_eigenvalues);
+
+occurances = {};
+
+
+<span class="keyword">for</span> i=1:size(unique_eig)
+    aRow = {unique_eig(i), 0};
+    occurances = [occurances; aRow];
+
+<span class="keyword">end</span>
+
+occurances = cell2mat(occurances);
+
+
+<span class="comment">% algebraic multiplicity</span>
+<span class="keyword">for</span> i=1:size(eigenvalues)
+
+    index = find(unique_eig == rounded_eigenvalues(i));
+
+    occurances(index, 2) = occurances(index, 2) + 1;
+
+<span class="keyword">end</span>
+
+<span class="comment">% geometric multiplicity</span>
+
+identity = eye(size(P));
+<span class="keyword">for</span> i= 1:size(unique_eig)
+
+    formula = P - unique_eig(i)*identity;
+
+    nullity = size(P, 1) - rank(formula);
+
+    occurances(i, 3) = nullity;
+<span class="keyword">end</span>
+
+
+<span class="keyword">for</span> i=1:size(unique_eig)
+    disp([<span class="string">"eig: "</span> + occurances(i,1)])
+    disp(<span class="string">"algebraic multiplicity"</span>)
+    disp(occurances(i,2));
+    disp(<span class="string">"geometric multiplicity"</span>)
+    disp(occurances(i,3));
+<span class="keyword">end</span>
+
+iminusp = identity - P;
+
+iminuspRREF = rref(iminusp);
+
+nullSpace = iminuspRREF(:,3)*-1 + [0; 0; 1];
+
+t = 1 / sum(nullSpace);
+
+steady_vector = t*nullSpace;
+disp(<span class="string">'steady_vect:'</span>)
+disp(steady_vector)
+</pre>
+<pre class="codeoutput">eig: 0.5
+algebraic multiplicity
+     2
+
+geometric multiplicity
+     2
+
+eig: 1
+algebraic multiplicity
+     1
+
+geometric multiplicity
+     1
+
+steady_vect:
+    0.6000
+    0.2000
+    0.2000
+
+</pre>
+<h2 id="2">Q2</h2>
+<pre class="codeinput">
+<span class="comment">% This is a Matlab code to determine the steady-state distribution for the cars</span>
+<span class="comment">% in Markov process in Problem A16 (Practice Problems of Section 6.3)</span>
+<span class="comment">% see page 378 of text book</span>
+
+
+<span class="comment">%x0 stands for the states of system at time t=0 (it can be chosen in a diffrent way)</span>
+x0=[0.1;0.6;0.3];
+
+<span class="comment">%P is the transition matrix for the system, here P is a 3x3 matrix</span>
+P=[0.8 0.3 0.3;
+   0.1 0.6 0.1;
+   0.1 0.1 0.6];
+
+v1=[];
+v2=[];
+v3=[];
+
+v1=[v1 x0(1)];
+v2=[v2 x0(2)];
+v3=[v3 x0(3)];
+
+
+powersofD = V*D*inv(V);
+<span class="keyword">for</span> i=1:500
+    x1=(powersofD^i)*x0; <span class="comment">% Finding the i-th state vector is computed</span>
+    <span class="keyword">if</span> (x1-powersofD*x1)&lt;1e-15
+        disp(<span class="string">'Steady state found'</span>)
+        <span class="keyword">break</span>;
+    <span class="keyword">end</span>
+v1=[v1 x1(1)];
+v2=[v2 x1(2)];
+v3=[v3 x1(3)];
+<span class="keyword">end</span>
+figure(1)
+hold <span class="string">on</span>
+plot(v1,<span class="string">'g+-'</span>)
+plot(v2,<span class="string">'ro--'</span>)
+plot(v3,<span class="string">'b*'</span>)
+legend(<span class="string">'Airport'</span>,<span class="string">'Train station'</span>,<span class="string">'City center'</span>)
+</pre>
+<pre class="codeoutput">Steady state found
+</pre>
+<img vspace="5" hspace="5" src="code_01.png" alt=""> <h2 id="3">Q3</h2>
+<pre class="codeinput">PQ3 = [0.8, 0.1, 0.1; 0.2, 0.7, 0.1; 0.3, 0.2, 0.5];
+PQ3 = transpose(PQ3);
+
+[VQ3, DQ3] = eig(PQ3);
+
+eigenvaluesQ3 = diag(DQ3);
+
+unique_eigQ3 = unique(eigenvaluesQ3);
+
+occurancesQ3 = {};
+
+
+<span class="keyword">for</span> i=1:size(unique_eigQ3)
+    aRow = {unique_eigQ3(i), 0};
+    occurancesQ3 = [occurancesQ3; aRow];
+
+<span class="keyword">end</span>
+
+occurancesQ3 = cell2mat(occurancesQ3);
+
+
+<span class="comment">% algebraic multiplicity</span>
+<span class="keyword">for</span> i=1:size(eigenvaluesQ3)
+
+    index = find(unique_eigQ3 == eigenvaluesQ3(i));
+
+    occurancesQ3(index, 2) = occurancesQ3(index, 2) + 1;
+
+<span class="keyword">end</span>
+
+<span class="comment">% geometric multiplicity</span>
+
+identity = eye(size(PQ3));
+<span class="keyword">for</span> i= 1:size(unique_eigQ3)
+
+    formulaQ3 = PQ3 - unique_eigQ3(i)*identity;
+
+    nullityQ3 = size(PQ3, 1) - rank(formulaQ3);
+
+    occurancesQ3(i, 3) = nullityQ3;
+<span class="keyword">end</span>
+
+
+<span class="keyword">for</span> i=1:size(unique_eigQ3)
+    disp([<span class="string">"eig: "</span> + occurancesQ3(i,1)])
+    disp(<span class="string">"algebraic multiplicity"</span>)
+    disp(occurancesQ3(i,2));
+    disp(<span class="string">"geometric multiplicity"</span>)
+    disp(occurancesQ3(i,3));
+<span class="keyword">end</span>
+
+iminuspQ3 = identity - PQ3;
+
+iminuspRREFQ3 = rref(iminuspQ3);
+
+nullSpaceQ3 = iminuspRREFQ3(:,3)*-1 + [0; 0; 1];
+
+t = 1 / sum(nullSpaceQ3);
+
+steady_vector = t*nullSpaceQ3;
+disp(<span class="string">'steady_vect:'</span>)
+disp(steady_vector)
+
+
+<span class="comment">%x0 stands for the states of system at time t=0 (it can be chosen in a diffrent way)</span>
+x0=[0.1;0.6;0.3];
+
+
+v1=[];
+v2=[];
+v3=[];
+
+v1=[v1 x0(1)];
+v2=[v2 x0(2)];
+v3=[v3 x0(3)];
+
+
+<span class="keyword">for</span> i=1:500
+    x1 = PQ3^i*x0; <span class="comment">% Finding the i-th state vector is computed</span>
+
+    <span class="keyword">if</span> (x1-PQ3^i*x1)&lt;1e-15
+        disp(<span class="string">'Steady state found'</span>)
+        <span class="keyword">break</span>;
+
+    <span class="keyword">end</span>
+
+
+
+v1=[v1 x1(1)];
+v2=[v2 x1(2)];
+v3=[v3 x1(3)];
+<span class="keyword">end</span>
+
+figure(3)
+hold <span class="string">on</span>
+plot(v1,<span class="string">'g+-'</span>)
+plot(v2,<span class="string">'ro--'</span>)
+plot(v3,<span class="string">'b*'</span>)
+legend(<span class="string">'Residence'</span>,<span class="string">'Library'</span>,<span class="string">'Aquatic'</span>)
+</pre>
+<pre class="codeoutput">eig: 0.4
+algebraic multiplicity
+     1
+
+geometric multiplicity
+     1
+
+eig: 0.6
+algebraic multiplicity
+     1
+
+geometric multiplicity
+     1
+
+eig: 1
+algebraic multiplicity
+     1
+
+geometric multiplicity
+     1
+
+steady_vect:
+    0.5417
+    0.2917
+    0.1667
+
+Steady state found
+</pre>
+<img vspace="5" hspace="5" src="code_02.png" alt=""> <p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Q1
+P = [ 8/10 3/10 3/10; 1/10 6/10 1/10; 1/10 1/10 6/10 ];
+
+
+[V, D] = eig(P);
+
+eigenvalues = diag(D);
+
+precision = 10^(-10);
+rounded_eigenvalues = round(eigenvalues / precision) * precision;
+
+unique_eig = unique(rounded_eigenvalues);
+
+occurances = {};
+
+
+for i=1:size(unique_eig)
+    aRow = {unique_eig(i), 0};
+    occurances = [occurances; aRow];
+
+end 
+
+occurances = cell2mat(occurances);
+
+
+% algebraic multiplicity
+for i=1:size(eigenvalues)
+
+    index = find(unique_eig == rounded_eigenvalues(i));
+    
+    occurances(index, 2) = occurances(index, 2) + 1;
+    
+end 
+
+% geometric multiplicity
+
+identity = eye(size(P));
+for i= 1:size(unique_eig)
+    
+    formula = P - unique_eig(i)*identity;
+    
+    nullity = size(P, 1) - rank(formula);
+
+    occurances(i, 3) = nullity;
+end 
+
+
+for i=1:size(unique_eig)
+    disp(["eig: " + occurances(i,1)])
+    disp("algebraic multiplicity")
+    disp(occurances(i,2));
+    disp("geometric multiplicity")
+    disp(occurances(i,3));
+end 
+
+iminusp = identity - P;
+
+iminuspRREF = rref(iminusp);
+
+nullSpace = iminuspRREF(:,3)*-1 + [0; 0; 1];
+
+t = 1 / sum(nullSpace);
+
+steady_vector = t*nullSpace;
+disp('steady_vect:')
+disp(steady_vector)
+
+%% Q2
+
+
+% This is a Matlab code to determine the steady-state distribution for the cars
+% in Markov process in Problem A16 (Practice Problems of Section 6.3) 
+% see page 378 of text book
+
+
+%x0 stands for the states of system at time t=0 (it can be chosen in a diffrent way)
+x0=[0.1;0.6;0.3];
+
+%P is the transition matrix for the system, here P is a 3x3 matrix 
+P=[0.8 0.3 0.3;
+   0.1 0.6 0.1;
+   0.1 0.1 0.6];
+
+v1=[];
+v2=[];
+v3=[];
+
+v1=[v1 x0(1)];
+v2=[v2 x0(2)];
+v3=[v3 x0(3)];
+
+
+powersofD = V*D*inv(V);
+for i=1:500
+    x1=(powersofD^i)*x0; % Finding the i-th state vector is computed 
+    if (x1-powersofD*x1)<1e-15
+        disp('Steady state found')
+        break;
+    end
+v1=[v1 x1(1)];
+v2=[v2 x1(2)];
+v3=[v3 x1(3)];
+end
+figure(1)
+hold on 
+plot(v1,'g+-')
+plot(v2,'roREPLACE_WITH_DASH_DASH')
+plot(v3,'b*')
+legend('Airport','Train station','City center')
+
+%% Q3
+
+
+PQ3 = [0.8, 0.1, 0.1; 0.2, 0.7, 0.1; 0.3, 0.2, 0.5];
+PQ3 = transpose(PQ3);
+
+[VQ3, DQ3] = eig(PQ3);
+
+eigenvaluesQ3 = diag(DQ3);
+
+unique_eigQ3 = unique(eigenvaluesQ3);
+
+occurancesQ3 = {};
+
+
+for i=1:size(unique_eigQ3)
+    aRow = {unique_eigQ3(i), 0};
+    occurancesQ3 = [occurancesQ3; aRow];
+
+end 
+
+occurancesQ3 = cell2mat(occurancesQ3);
+
+
+% algebraic multiplicity
+for i=1:size(eigenvaluesQ3)
+
+    index = find(unique_eigQ3 == eigenvaluesQ3(i));
+    
+    occurancesQ3(index, 2) = occurancesQ3(index, 2) + 1;
+    
+end 
+
+% geometric multiplicity
+
+identity = eye(size(PQ3));
+for i= 1:size(unique_eigQ3)
+    
+    formulaQ3 = PQ3 - unique_eigQ3(i)*identity;
+    
+    nullityQ3 = size(PQ3, 1) - rank(formulaQ3);
+
+    occurancesQ3(i, 3) = nullityQ3;
+end 
+
+
+for i=1:size(unique_eigQ3)
+    disp(["eig: " + occurancesQ3(i,1)])
+    disp("algebraic multiplicity")
+    disp(occurancesQ3(i,2));
+    disp("geometric multiplicity")
+    disp(occurancesQ3(i,3));
+end 
+
+iminuspQ3 = identity - PQ3;
+
+iminuspRREFQ3 = rref(iminuspQ3);
+
+nullSpaceQ3 = iminuspRREFQ3(:,3)*-1 + [0; 0; 1];
+
+t = 1 / sum(nullSpaceQ3);
+
+steady_vector = t*nullSpaceQ3;
+disp('steady_vect:')
+disp(steady_vector)
+
+
+%x0 stands for the states of system at time t=0 (it can be chosen in a diffrent way)
+x0=[0.1;0.6;0.3];
+
+
+v1=[];
+v2=[];
+v3=[];
+
+v1=[v1 x0(1)];
+v2=[v2 x0(2)];
+v3=[v3 x0(3)];
+
+
+for i=1:500
+    x1 = PQ3^i*x0; % Finding the i-th state vector is computed 
+    
+    if (x1-PQ3^i*x1)<1e-15
+        disp('Steady state found')
+        break;
+    
+    end
+
+    
+    
+v1=[v1 x1(1)];
+v2=[v2 x1(2)];
+v3=[v3 x1(3)];
+end
+
+figure(3)
+hold on 
+plot(v1,'g+-')
+plot(v2,'roREPLACE_WITH_DASH_DASH')
+plot(v3,'b*')
+legend('Residence','Library','Aquatic')
+
+
+
+
+
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>

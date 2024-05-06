@@ -1,0 +1,557 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>code</title>
+<meta name="generator" content="MATLAB 23.2">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-02-16">
+<meta name="DC.source" content="code.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Part 1</a>
+</li>
+<li>
+<a href="#2">Part 2 %% %q1</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Part 1</h2>
+<pre class="codeinput">m = 10;
+
+case1n = 10;
+case2n = 15;
+case3n = 5;
+
+[arrCase1, dCount1, iCount1] = getCase(m, case1n);
+[arrCase2, dCount2, iCount2] = getCase(m, case2n);
+[arrCase3, dCount3, iCount3] = getCase(m, case3n);
+
+disp([<span class="string">'1st Case: '</span> num2str(dCount1) <span class="string">' linearly dependent sets and '</span> num2str(iCount1) <span class="string">' linearly independent sets'</span>]);
+disp([<span class="string">'2nd Case: '</span> num2str(dCount2) <span class="string">' linearly dependent sets and '</span> num2str(iCount2) <span class="string">' linearly independent sets'</span>]);
+disp([<span class="string">'3rd Case: '</span> num2str(dCount3) <span class="string">' linearly dependent sets and '</span> num2str(iCount3) <span class="string">' linearly independent sets'</span>]);
+
+
+newM = 15;
+b = rand(newM,1);
+
+matrix1c = rand(newM, newM);
+matrix2c = rand(newM, newM-5);
+matrix3c = rand(newM, newM+5);
+
+matrix1soln = getSolutionMatrix(matrix1c, b);
+matrix2soln = getSolutionMatrix(matrix2c, b);
+matrix3soln = getSolutionMatrix(matrix3c, b);
+
+disp(matrix1soln)
+disp(matrix2soln)
+disp(matrix3soln)
+</pre>
+<pre class="codeoutput">    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+    10
+
+     5
+
+     5
+
+     5
+
+     5
+
+     5
+
+1st Case: 0 linearly dependent sets and 5 linearly independent sets
+2nd Case: 0 linearly dependent sets and 5 linearly independent sets
+3rd Case: 5 linearly dependent sets and 0 linearly independent sets
+</pre>
+<h2 id="2">Part 2 %% %q1</h2>
+<pre class="codeinput">w1 = [1; 2; -1; 3];
+w2 = [4; 1; 1; 8];
+w3 = [1; 0; 2; 2];
+w4 = [-1; 1; 2; -1];
+
+s1 = [w1 w2 w3 w4];
+
+rrefS1 = rref(s1);
+
+s1Rank = rank(rrefS1);
+
+a = rand(3,1);
+myVect = [a; 0];
+
+
+mySet = [w1 w2 w3 myVect];
+
+mySetrref = rref(mySet);
+disp(mySetrref)
+
+<span class="comment">%q2</span>
+z2 = [1; 0; 2; 2];
+z3 = [3; 4; 0; 8];
+
+s1z2 = [s1 z2];
+s1z2rref = rref(s1z2);
+disp(s1z2rref);
+
+s1z3 = [s1 z3];
+s1z3rref = rref(s1z3);
+disp(s1z3rref);
+
+<span class="comment">%q3</span>
+z1q3 = [2; 4; -2; 6];
+s2q3 = [z1q3 z2 z3];
+
+s2q3rref= rref(s2q3);
+disp(s2q3rref)
+rank(s2q3)
+
+<span class="comment">%q4</span>
+z1q4 = [2; 4; -2; 5];
+s2q4 = [z1q4 z2 z3];
+
+s1Basis =  [w1 w2 w3];
+
+augMatrix = [s1Basis -s2q4];
+
+nullspaceMat = null(augMatrix);
+
+disp(nullspaceMat);
+
+nullspacerref = rref(nullspaceMat);
+disp(nullspacerref);
+disp(rank(nullspacerref))
+</pre>
+<pre class="codeoutput">     1     0     0     0
+     0     1     0     0
+     0     0     1     0
+     0     0     0     1
+
+     1     0     0     1     0
+     0     1     0    -1     0
+     0     0     1     2     1
+     0     0     0     0     0
+
+     1     0     0     1     2
+     0     1     0    -1     0
+     0     0     1     2     1
+     0     0     0     0     0
+
+     1     0     1
+     0     1     1
+     0     0     0
+     0     0     0
+
+
+ans =
+
+     2
+
+   -0.1111    0.8455
+   -0.0000    0.0000
+    0.6733    0.3035
+    0.0000   -0.0000
+    0.7289   -0.1193
+   -0.0555    0.4228
+
+     1     0
+     0     1
+     0     0
+     0     0
+     0     0
+     0     0
+
+     2
+
+</pre>
+<pre class="codeinput">
+<span class="comment">% Functions we use for Part 1</span>
+<span class="keyword">function</span> solution = getSolutionMatrix(A, B)
+
+
+    agumentedMatrix = [A B];
+    reduced = rref(agumentedMatrix);
+
+    solution = reduced;
+
+<span class="keyword">end</span>
+
+
+
+<span class="keyword">function</span> [list, ld, li] = getCase(row,col)
+    myList = {};
+    ld = 0;
+    li = 0;
+    <span class="keyword">for</span> i=1:5
+        vectors = rand(row,col);
+        theRank = rank(vectors);
+        disp(theRank)
+        myList = [myList, vectors];
+        <span class="keyword">if</span> (theRank == row)
+            li = li + 1;
+        <span class="keyword">else</span>
+            ld = ld + 1;
+        <span class="keyword">end</span>
+
+    <span class="keyword">end</span>
+    list = myList;
+<span class="keyword">end</span>
+</pre>
+<pre class="codeoutput">  Columns 1 through 7
+
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+
+  Columns 8 through 14
+
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+
+  Columns 15 through 16
+
+         0    1.2372
+         0    0.0198
+         0   -0.2564
+         0   -0.2137
+         0   -0.3389
+         0   -0.2054
+         0   -0.4218
+         0   -0.2274
+         0   -0.1536
+         0    0.1428
+         0    0.5855
+         0    0.8505
+         0   -0.0618
+         0   -0.0023
+    1.0000   -0.1446
+
+     1     0     0     0     0     0     0     0     0     0     0
+     0     1     0     0     0     0     0     0     0     0     0
+     0     0     1     0     0     0     0     0     0     0     0
+     0     0     0     1     0     0     0     0     0     0     0
+     0     0     0     0     1     0     0     0     0     0     0
+     0     0     0     0     0     1     0     0     0     0     0
+     0     0     0     0     0     0     1     0     0     0     0
+     0     0     0     0     0     0     0     1     0     0     0
+     0     0     0     0     0     0     0     0     1     0     0
+     0     0     0     0     0     0     0     0     0     1     0
+     0     0     0     0     0     0     0     0     0     0     1
+     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0     0     0     0     0
+
+  Columns 1 through 7
+
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+
+  Columns 8 through 14
+
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+         0         0         0         0         0         0         0
+    1.0000         0         0         0         0         0         0
+         0    1.0000         0         0         0         0         0
+         0         0    1.0000         0         0         0         0
+         0         0         0    1.0000         0         0         0
+         0         0         0         0    1.0000         0         0
+         0         0         0         0         0    1.0000         0
+         0         0         0         0         0         0    1.0000
+         0         0         0         0         0         0         0
+
+  Columns 15 through 21
+
+         0   -0.0495   -0.5247   -0.4224    0.0663    1.5156   -0.0355
+         0  -10.9262    4.8249    6.0507    1.9860   16.6276   -7.5794
+         0    4.4041   -2.4632   -1.3062   -0.6810   -7.3510    3.1786
+         0    2.8506   -1.2852   -1.6889   -0.5757   -3.4659    1.8118
+         0   -5.6436    2.6842    1.6822    0.9671    6.8609   -3.5856
+         0   -4.9718    2.1828    1.4779    1.1009    9.7059   -4.8267
+         0   -7.2194    3.9238    0.7703    0.4804    9.5703   -4.7695
+         0    6.8290   -3.6132   -1.7091   -0.0392   -8.8457    5.0661
+         0    6.0112   -2.9990   -3.3061   -1.1976   -7.9305    4.0678
+         0   10.6209   -4.7301   -6.6714   -3.0935  -17.6146    7.7357
+         0    0.5468    0.0047    1.3889   -0.3041   -2.8900    0.6830
+         0    2.2868   -1.2451    2.1387    1.2806   -3.4099    3.0624
+         0    0.5054    0.2835    1.0172    0.6415    1.0572   -0.2966
+         0   -1.6591    1.1811    1.2116    0.7752    3.7893   -1.8458
+    1.0000    1.8043    0.0633   -1.5802   -0.9300   -2.4884    0.8126
+
+</pre>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2023b</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% Part 1
+
+m = 10;
+
+case1n = 10;
+case2n = 15;
+case3n = 5;
+
+[arrCase1, dCount1, iCount1] = getCase(m, case1n);
+[arrCase2, dCount2, iCount2] = getCase(m, case2n);
+[arrCase3, dCount3, iCount3] = getCase(m, case3n);
+
+disp(['1st Case: ' num2str(dCount1) ' linearly dependent sets and ' num2str(iCount1) ' linearly independent sets']);
+disp(['2nd Case: ' num2str(dCount2) ' linearly dependent sets and ' num2str(iCount2) ' linearly independent sets']);
+disp(['3rd Case: ' num2str(dCount3) ' linearly dependent sets and ' num2str(iCount3) ' linearly independent sets']);
+
+
+newM = 15;
+b = rand(newM,1);
+
+matrix1c = rand(newM, newM);
+matrix2c = rand(newM, newM-5);
+matrix3c = rand(newM, newM+5);
+
+matrix1soln = getSolutionMatrix(matrix1c, b);
+matrix2soln = getSolutionMatrix(matrix2c, b);
+matrix3soln = getSolutionMatrix(matrix3c, b);
+
+disp(matrix1soln)
+disp(matrix2soln)
+disp(matrix3soln)
+
+
+
+
+
+
+%% Part 2 %%
+%q1
+
+w1 = [1; 2; -1; 3];
+w2 = [4; 1; 1; 8];
+w3 = [1; 0; 2; 2];
+w4 = [-1; 1; 2; -1];
+
+s1 = [w1 w2 w3 w4];
+
+rrefS1 = rref(s1);
+
+s1Rank = rank(rrefS1);
+
+a = rand(3,1);
+myVect = [a; 0];
+
+
+mySet = [w1 w2 w3 myVect];
+
+mySetrref = rref(mySet);
+disp(mySetrref)
+
+%q2
+z2 = [1; 0; 2; 2];
+z3 = [3; 4; 0; 8];
+
+s1z2 = [s1 z2];
+s1z2rref = rref(s1z2);
+disp(s1z2rref);
+
+s1z3 = [s1 z3];
+s1z3rref = rref(s1z3);
+disp(s1z3rref);
+
+%q3
+z1q3 = [2; 4; -2; 6];
+s2q3 = [z1q3 z2 z3]; 
+
+s2q3rref= rref(s2q3);
+disp(s2q3rref)
+rank(s2q3)
+
+%q4
+z1q4 = [2; 4; -2; 5];
+s2q4 = [z1q4 z2 z3];
+
+s1Basis =  [w1 w2 w3];
+
+augMatrix = [s1Basis -s2q4]; 
+
+nullspaceMat = null(augMatrix);
+
+disp(nullspaceMat);
+
+nullspacerref = rref(nullspaceMat);
+disp(nullspacerref);
+disp(rank(nullspacerref))
+
+
+
+
+%%
+
+% Functions we use for Part 1
+function solution = getSolutionMatrix(A, B)
+   
+    
+    agumentedMatrix = [A B];
+    reduced = rref(agumentedMatrix);
+    
+    solution = reduced;
+
+end
+
+
+
+function [list, ld, li] = getCase(row,col)
+    myList = {};
+    ld = 0;
+    li = 0;
+    for i=1:5
+        vectors = rand(row,col);
+        theRank = rank(vectors);
+        disp(theRank)
+        myList = [myList, vectors];
+        if (theRank == row)
+            li = li + 1;
+        else 
+            ld = ld + 1;
+        end
+
+    end
+    list = myList;
+end
+
+
+##### SOURCE END #####
+-->
+</body>
+</html>
